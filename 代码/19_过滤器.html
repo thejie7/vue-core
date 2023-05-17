@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+  <script src="../js/dayjs.min.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <div>{{time}}</div>
+    <div>{{time | timeFormater()}}</div>
+    <div>{{time | timeFormater("YYYY年MM月DD日")}}</div>
+    <div>{{time | timeFormater() | mySlice}}</div>
+  </div>
+  <script>
+    let date = new Date()
+    new Vue({
+      el: "#root",
+      data: {
+        time: date.getTime()
+      },
+      filters: {
+        timeFormater(value, str = "YYYY-MM-DD HH:mm:ss") {
+          return dayjs(value).format(str)
+        },
+        mySlice(value) {
+          return value.slice(0, 4)
+        }
+      }
+    })
+    console.log(dayjs())
+
+
+  </script>
+</body>
+
+</html>

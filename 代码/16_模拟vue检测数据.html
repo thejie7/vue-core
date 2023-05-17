@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+
+    // vue监视数据的原理大致如下
+    let data = {
+      name: "张三",
+      age: 18
+    }
+    //创建一个实例对象，用于监视data中的属性变化
+    const obs = new Observer(data)
+    console.log(obs)
+
+    // 构建一个实例对象
+    let vm = {}
+    vm._data = data = obs
+
+    //构造函数用于监视对象，实现响应式数据的功能
+    function Observer(obj) {
+      const keys = Object.keys(obj) //通过Object.keys将对象变为数组
+      keys.forEach((k) => {  //遍历 为每个属性配置get方法与set方法
+        Object.defineProperty(this, k, {
+          get() {
+            return obj[k]
+          },
+          set(val) {
+            obj[k] = val
+          }
+        })
+      })
+    }
+
+  </script>
+</body>
+
+</html>

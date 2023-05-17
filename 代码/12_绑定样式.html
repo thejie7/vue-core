@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+<style>
+  .basic {
+    width: 200px;
+    height: 100px;
+    border: 1px solid #000;
+  }
+
+  .normal {
+    background-color: yellow;
+  }
+
+  .happy {
+    background-color: hotpink;
+  }
+
+  .sad {
+    background-color: darkgrey;
+  }
+
+  .a1 {
+    font-style: italic;
+  }
+
+  .a2 {
+    font-size: 20px;
+  }
+
+  .a3 {
+    border-radius: 10px;
+  }
+</style>
+
+<body>
+  <div id="root">
+    <!-- 字符串写法 适用于：样式类名不确定，需要动态指定 -->
+    <div class="basic" :class="mood" @click="changeMood">{{text}}</div> <br>
+    <!-- 数组写法 适用于：样式个数不确定，类名也不确定 -->
+    <div class="basic" :class="classArr">{{text}}</div> <br>
+    <!-- 对象写法 适用于：样式个数确定，类名确定，要动态决定 -->
+    <div class="basic" :class="classObj">{{text}}</div> <br>
+  </div>
+  <script>
+    new Vue({
+      el: "#root",
+      data: {
+        text: "测试",
+        mood: "normal",
+        classArr: ["a1", "a2", "a3"],
+        classObj: {
+          a1: true,
+          a2: false
+        }
+      },
+      methods: {
+        changeMood() {
+          let arr = ["normal", "happy", "sad"]
+          this.mood = arr[Math.floor(Math.random() * 3)]
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

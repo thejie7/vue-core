@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="root">
+        <h1>Hello,{{name}}</h1>
+    </div>
+
+    <script>
+        //创建Vue实例 “V”要大写
+        new Vue({
+            el: '#root',  //el配置对应的容器 通常为css选择器字符串
+            data: {    //data用于储存数据，数据供el所对应的容器使用  暂时先写成一个对象
+                name: '张三'
+            }
+        })
+    </script>
+</body>
+
+</html>

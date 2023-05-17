@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <h1>{{text}}</h1>
+    <hr>
+    <school></school>
+    <hr>
+    <student></student>
+    <hr>
+    <!-- 这里的hello是全局组件 -->
+    <hello></hello>
+  </div>
+  <hr>
+  <div id="root2">
+    <!-- 这里的hello是全局组件 -->
+    <hello></hello>
+  </div>
+</body>
+<script>
+  // 创建组件
+  const school = Vue.extend({
+    //用 template时里面的结构需要包裹到一个盒子中
+    template: ` 
+    <div>
+    <h1>{{schoolName}}</h1>
+    <h1>{{address}}</h1>
+    <button @click="showSchoolName">点我显示学校名称</button>
+    </div>`,
+    data() {
+      return {
+        schoolName: "qzu",
+        address: "浙江衢州",
+      }
+    },
+    methods: {
+      showSchoolName() {
+        alert(this.schoolName)
+      }
+    },
+  })
+  const student = Vue.extend({
+    template: `
+    <div>
+    <h1>{{studentName}}</h1>
+    <h1>{{age}}</h1>
+    </div>`,
+    data() {
+      return {
+        studentName: "张三",
+        age: 18
+      }
+    }
+  })
+  const hello = Vue.extend({
+    template: `
+    <div>
+      <h1>{{text}}</h1>
+    </div>`,
+    data() {
+      return {
+        text: "欢迎"
+      }
+    },
+  })
+
+  //注册全局组件
+  Vue.component('hello', hello)
+
+  //注册局部组件
+  new Vue({
+    el: "#root",
+    data: {
+      text: "你好啊"
+    },
+    components: {
+      school: school,
+      student: student
+    }
+  })
+
+  new Vue({
+    el: "#root2"
+  })
+</script>
+
+</html>

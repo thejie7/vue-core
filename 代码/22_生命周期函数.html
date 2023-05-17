@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <h1 :style="{opacity: n}">你好</h1>
+    <button @click="bye">点我销毁vm</button>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#root",
+      data: {
+        n: 1
+      },
+      methods: {
+        bye() {
+          vm.$destroy()
+        }
+      },
+      mounted() {
+        this.timer = setInterval(() => {
+          this.n -= 0.01
+          if (this.n <= 0) this.n = 1
+        }, 16)
+      },
+      beforeDestroy() {
+        clearInterval(this.timer)
+      }
+    })
+  </script>
+
+</body>
+
+</html>

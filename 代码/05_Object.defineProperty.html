@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj={
+            id:1,
+            uname:'张三',
+        }
+        //Object.defineProperty(obj,prop,descriptor)定义对象中新属性或修改原有的属性
+        //obj 目标对象  prop 需定义或修改的属性的名字  descriptor目标属性所拥有的特性
+        Object.defineProperty(obj,'num',{
+            //添加或修改用value
+            value:1000
+        })
+        console.log(obj);
+
+        Object.defineProperty(obj,'id',{
+            //writable不允许修改某个属性值  例：不允许修改id这个属性
+            writable:false      
+        })
+        console.log(obj);
+
+        Object.defineProperty(obj,'address',{
+            value:'翻斗花园',
+            writable:false,
+            //enumerable 如果值为false 则不允许遍历， 默认值是false
+            enumerable:false
+        })
+        console.log(Object.keys(obj));
+
+        Object.defineProperty(obj,'address',{
+            value:'翻斗花园',
+            writable:false,
+            enumerable:false,
+            //configurable 如果值为false 则不允许删除该属性值 默认值是false   不允许再次修改这个特性
+            configurable:false,
+        })
+        delete obj.address;
+        console.log(obj);
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root" @submit.prevent="demo">
+    <form>
+      账号: <input type="text" v-model.trim="userInfo.account"> <br>
+      密码: <input type="password" v-model.trim="userInfo.password"> <br>
+      年龄: <input type="number" v-model.number="userInfo.age"> <br>
+      性别: 男: <input type="radio" name="sex" v-model="userInfo.sex" value="男"> 女: <input type="radio" name="sex"
+        v-model="userInfo.sex" value="女"> <br>
+      爱好: 学习<input type="checkbox" v-model="userInfo.hobby" value="study"> 打游戏<input type="checkbox"
+        v-model="userInfo.hobby" value="game"> 吃饭<input type="checkbox" v-model="userInfo.hobby" value="eat"> <br>
+      所属校区:
+      <select v-model="userInfo.city">
+        <option value="北京">北京</option>
+        <option value="上海">上海</option>
+        <option value="浙江">浙江</option>
+        <option value="深圳">深圳</option>
+      </select> <br>
+      其他信息: <textarea v-model.lazy="userInfo.other"> </textarea> <br>
+      <input type="checkbox" v-model="userInfo.ifAgree">阅读并接受<a href="http://www.bilibili.com">用户协议</a>
+      <button>提交数据</button>
+    </form>
+  </div>
+  <script>
+    new Vue({
+      el: "#root",
+      data: {
+        userInfo: {
+          account: "",
+          password: "",
+          age: "",
+          sex: "",
+          hobby: [],
+          city: "",
+          other: "",
+          ifAgree: ""
+        }
+      },
+      methods: {
+        demo() {
+          console.log(JSON.stringify(this.userInfo))
+        }
+      },
+    })
+
+  </script>
+</body>
+
+</html>

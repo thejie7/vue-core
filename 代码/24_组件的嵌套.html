@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="../js/vue.js"></script>
+</head>
+
+<body>
+  <div id="root">
+    <app></app>
+  </div>
+</body>
+<script>
+  //创建一个学生组件，这个组件是学校组件的子组件,注册在School组件下面
+  const Student = Vue.extend({
+    template: `
+    <div>
+      <h1>学校名称{{studentName}}</h1>
+      <h1>学校地址{{age}}</h1>
+    </div>`,
+    data() {
+      return {
+        studentName: "张三",
+        age: 18
+      }
+    },
+  })
+
+  //创建一个学校组件
+  const School = Vue.extend({
+    template: `
+    <div>
+      <h1>学校名称{{schoolName}}</h1>
+      <h1>学校地址{{address}}</h1>
+      <!--子组件注册给哪个父组件，就用在那个父组件里面--->
+      <Student></Student>
+    </div>`,
+    data() {
+      return {
+        schoolName: "qzc",
+        address: "浙江衢州"
+      }
+    },
+    components: {
+      Student
+    }
+  })
+
+  //创建一个Hello组件
+  const Hello = Vue.extend({
+    template: `
+    <div>
+      <h1>{{text}}</h1>
+    </div>`,
+    data() {
+      return {
+        text: "欢迎"
+      }
+    },
+  })
+  //创建一个app组件专门用于注册组件
+  const app = Vue.extend({
+    template: `
+    <div>
+      <Hello></Hello>
+      <School></School>
+    </div>
+    `,
+    components: {
+      School,
+      Hello
+    }
+  })
+  new Vue({
+    el: "#root",
+    components: {
+      app
+    }
+  })
+</script>
+
+</html>
